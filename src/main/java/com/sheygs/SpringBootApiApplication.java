@@ -14,7 +14,7 @@ public class SpringBootApiApplication {
     }
 
     @GetMapping
-    public String getMessage(){
-        return "Hello, World!";
+    public String geHealth(){
+        return "okay";
     }
 }
