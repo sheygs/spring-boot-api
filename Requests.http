@@ -2,5 +2,34 @@
 GET http://localhost:8080
 
 
-### GET Software Engineers
+### GET Fetch all Engineer records
 GET http://localhost:8080/api/v1/software-engineers
+
+### GET Engineer record
+GET http://localhost:8080/api/v1/software-engineers/1
+
+### POST Create Engineer record
+POST http://localhost:8080/api/v1/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Phillip",
+  "techStack": [
+    "PHP", "Laravel"
+  ]
+}
+
+### Remove Engineer
+DELETE http://localhost:8080/api/v1/software-engineers/2
+
+
+### Update Engineer record
+PUT http://localhost:8080/api/v1/software-engineers/1
+Content-Type: application/json
+
+{
+  "name": "Olusegun",
+  "techStack": [
+    "Node.js", "Java"
+  ]
+}
