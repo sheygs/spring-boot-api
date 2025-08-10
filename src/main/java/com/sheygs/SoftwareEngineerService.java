@@ -8,9 +8,11 @@ import java.util.List;
 @Service
 public class SoftwareEngineerService {
     private final SoftwareEngineerRepository softwareEngineerRepository;
+    private final AIService aiService;
 
-    public SoftwareEngineerService(SoftwareEngineerRepository softwareEngineerRepository){
+    public SoftwareEngineerService(SoftwareEngineerRepository softwareEngineerRepository, AIService aiService){
          this.softwareEngineerRepository = softwareEngineerRepository;
+         this.aiService = aiService;
     }
 
     // preferred: use DTO
@@ -20,6 +22,14 @@ public class SoftwareEngineerService {
 
     // preferred: use DTO
     public void insertEngineer(SoftwareEngineer softwareEngineer) {
+      var prompt = """
+           Based on the programming tech stack %s that %s has given, provide a full learning path and recommendations for this user.
+          """.formatted(softwareEngineer.getTechStack(), softwareEngineer.getName());
+
+      String chatResponse = this.aiService.chat(prompt);
+
+      softwareEngineer.setLearningPathRecommendation(chatResponse);
+
       this.softwareEngineerRepository.save(softwareEngineer);
     }
 
